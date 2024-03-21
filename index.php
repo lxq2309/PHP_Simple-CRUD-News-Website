@@ -64,12 +64,14 @@ $result = mysqli_query($conn, $sql);
     </div>
 
     <div class="main">
+        <a href="<?php echo $WEBSITE_URL . '/create.php' ?>"><button>Tạo bài đăng mới</button></a>
         <table>
             <thead>
                 <th>Mã bài đăng</th>
                 <th>Tên bài đăng</th>
                 <th>Ảnh</th>
                 <th>Thời gian đăng</th>
+                <th>Hành động</th>
             </thead>
             <tbody>
                 <?php if (mysqli_num_rows($result) > 0) { ?>
@@ -88,6 +90,10 @@ $result = mysqli_query($conn, $sql);
                             </td>
                             <td>
                                 <?php echo $row['created_at'] ?>
+                            </td>
+                            <td>
+                                <a href="<?php echo $WEBSITE_URL . '/edit.php?id=' . $row['article_id'] ?>"><button style="background-color: green; color: white;">Sửa</button></a>
+                                <a href="<?php echo $WEBSITE_URL . '/delete.php?id=' . $row['article_id'] ?>"><button style="background-color: red; color: white;">Xoá</button></a>
                             </td>
                         </tr>
                     <?php } ?>
