@@ -92,8 +92,12 @@ $result = mysqli_query($conn, $sql);
                                 <?php echo $row['created_at'] ?>
                             </td>
                             <td>
-                                <a href="<?php echo $WEBSITE_URL . '/edit.php?id=' . $row['article_id'] ?>"><button style="background-color: green; color: white;">Sửa</button></a>
-                                <a href="<?php echo $WEBSITE_URL . '/delete.php?id=' . $row['article_id'] ?>"><button style="background-color: red; color: white;">Xoá</button></a>
+                                <a href="<?php echo $WEBSITE_URL . '/clone.php?id=' . $row['article_id'] ?>"><button
+                                        style="background-color: blue; color: white;">Nhân bản</button></a>
+                                <a href="<?php echo $WEBSITE_URL . '/edit.php?id=' . $row['article_id'] ?>"><button
+                                        style="background-color: green; color: white;">Sửa</button></a>
+                                <a href="<?php echo $WEBSITE_URL . '/delete.php?id=' . $row['article_id'] ?>"><button
+                                        style="background-color: red; color: white;">Xoá</button></a>
                             </td>
                         </tr>
                     <?php } ?>
