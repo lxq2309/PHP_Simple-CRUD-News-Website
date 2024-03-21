@@ -6,3 +6,4 @@ $DB_HOST = 'localhost'; // Database
 $DB_USER = 'root'; // Database username
 $DB_PASS = ''; // Database password
 $DB_NAME = 'simple_crud_news_db'; // Database name
+date_default_timezone_set('Asia/Ho_Chi_Minh');
