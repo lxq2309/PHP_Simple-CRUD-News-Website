@@ -105,8 +105,8 @@ $result = mysqli_query($conn, $sql);
         <div class="sort">
             <form action="">
                 <select name="sort" id="">
-                    <option value="desc">Mới nhất</option>
-                    <option value="asc">Cũ nhất</option>
+                    <option value="desc" <?php echo ($sort == 'desc' ? 'selected' : '') ?>>Mới nhất</option>
+                    <option value="asc" <?php echo ($sort == 'asc' ? 'selected' : '') ?>>Cũ nhất</option>
                 </select>
                 <input type="submit" value="Chọn">
             </form>
