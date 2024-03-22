@@ -13,12 +13,17 @@ $pageSize = 5;
 $pageCount = ceil($totalCount / $pageSize);
 $pageNumber = 1;
 $recordInPage = 0;
+$sort = 'desc';
+if(isset($_GET['sort']))
+{
+    $sort = $_GET['sort'];
+}
 if (isset ($_GET['page'])) {
     $pageNumber = $_GET['page'];
 }
 $offset = $pageSize * ($pageNumber - 1);
 
-$sql = "SELECT * FROM articles WHERE title LIKE '%$searchText%' LIMIT $pageSize OFFSET $offset";
+$sql = "SELECT * FROM articles WHERE title LIKE '%$searchText%' ORDER BY article_id $sort LIMIT $pageSize OFFSET $offset";
 $result = mysqli_query($conn, $sql);
 ?>
 
@@ -30,7 +35,7 @@ $result = mysqli_query($conn, $sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?php echo $WEBSITE_DESCRIPTION; ?>">
     <title>
-        <?php echo ($searchText != null ? "Kết quả tìm kiếm $searchText" : "$WEBSITE_TITLE") . ($pageNumber != 1 ? " - Trang $pageNumber": '') ?>
+        <?php echo ($searchText != null ? "Kết quả tìm kiếm $searchText" : "$WEBSITE_TITLE") . ($pageNumber != 1 ? " - Trang $pageNumber" : '') ?>
     </title>
 
     <style>
@@ -75,6 +80,10 @@ $result = mysqli_query($conn, $sql);
             border: 1px solid blue;
             background-color: aqua;
         }
+
+        div {
+            margin: 10px;
+        }
     </style>
 </head>
 
@@ -92,10 +101,19 @@ $result = mysqli_query($conn, $sql);
                 <input type="text" name="search">
                 <input type="submit" value="Tìm">
             </form>
-
-
         </div>
-        <a href="<?php echo $WEBSITE_URL . '/create.php' ?>"><button>Tạo bài đăng mới</button></a>
+        <div class="sort">
+            <form action="">
+                <select name="sort" id="">
+                    <option value="desc">Mới nhất</option>
+                    <option value="asc">Cũ nhất</option>
+                </select>
+                <input type="submit" value="Chọn">
+            </form>
+        </div>
+        <div class="create">
+            <a href="<?php echo $WEBSITE_URL . '/create.php' ?>"><button>Tạo bài đăng mới</button></a>
+        </div>
         <table>
             <thead>
                 <th>Mã bài đăng</th>
@@ -139,7 +157,7 @@ $result = mysqli_query($conn, $sql);
         <div>
             <?php for ($i = 1; $i <= $pageCount; $i++) { ?>
                 <a class="<?php echo ($pageNumber == $i ? 'active' : '') ?>"
-                    href="<?php echo $WEBSITE_URL . '/?page=' . $i . '&search=' . $searchText ?>">
+                    href="<?php echo $WEBSITE_URL . '/?page=' . $i . '&search=' . $searchText . '&sort=' . $sort ?>">
                     <?php echo $i ?>
                 </a>
             <?php } ?>
